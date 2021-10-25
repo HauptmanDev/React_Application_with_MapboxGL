@@ -1,0 +1,23 @@
+.abg-switch__container {
+  width: 175px;
+  height: 27px;
+  min-height: 20px;
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  background-color: rgba(35, 55, 75, 0.9);
+
+  .abg-switch__item {
+   padding: 13px;
+  }
+
+  .abg-switch__overlay {
+    background-color: white;
+    box-shadow: 0 0 6px 1px white;
+  }
+
+  .abg-switch__item.abg-switch__item--on {
+    color: rgba(35, 55, 75, 0.9);
+  }
+
+}

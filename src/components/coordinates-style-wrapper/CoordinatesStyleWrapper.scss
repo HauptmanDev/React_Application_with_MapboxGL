@@ -1,0 +1,13 @@
+.coordinates {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  border-bottom: 1px solid white;
+
+  .title {
+    margin-bottom: 10px;
+  }
+}

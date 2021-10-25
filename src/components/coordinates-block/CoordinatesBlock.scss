@@ -1,0 +1,21 @@
+.coordinates-block {
+  display: flex;
+  /*flex-direction: column;*/
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 5px;
+
+  .mapboxgl-lng, .mapboxgl-lat, .mapboxgl-zoom {
+    width: 60px;
+  }
+
+  .mapboxgl-styles-list {
+    width: 60px;
+  }
+
+  .mapboxgl-coordinates-block-button {
+    width: 60px;
+  }
+}
