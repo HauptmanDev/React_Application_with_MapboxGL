@@ -21,12 +21,12 @@ const App = () => {
 
     const contentMount = () => {
         switch (mode) {
+            case "3D":
+                return <AppObjectMain/>;
+            case "Dir":
+                return <AppDirMain mapStyle={mapStyle}/>;
             case "Geo":
                 return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
-            case "Dir":
-                return <AppDirMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
-            case "3D":
-                return <AppObjectMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
             default:
                 return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
         }

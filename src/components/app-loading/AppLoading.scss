@@ -1,9 +1,16 @@
 .App-loading {
   position: absolute;
   height: calc(100vh - 5rem);
-  width: 100%;
+  width: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 5rem;
+  left: 0;
+}
+
+@media screen and (max-width: 725px) {
+  .App-loading {
+    width: 100%;
+  }
 }

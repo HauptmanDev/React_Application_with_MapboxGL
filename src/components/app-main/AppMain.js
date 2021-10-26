@@ -18,7 +18,7 @@ const initCoordinates = {
     initStyle: 'mapbox://styles/mapbox/dark-v10',
 };
 
-export const AppMain = ({mapStyle, setMapStyle}) => {
+export const AppMain = ({mapStyle, setMapStyle, setIsLoading}) => {
 
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -129,28 +129,6 @@ export const AppMain = ({mapStyle, setMapStyle}) => {
             if (e.type !== 'draw.delete')
                 alert('Click the map to draw a polygon.');
         }
-
-        // if (data.features.length === 0) {
-        //     const answerPolygon = document.getElementById('calculated-area-polygon');
-        //     const answerLine = document.getElementById('calculated-area-line');
-        //     answerPolygon.innerHTML = '';
-        //     answerLine.innerHTML = '';
-        //     if (e.type !== 'draw.delete') alert('Click the map to draw a polygon.');
-        //     return;
-        // }
-        //
-        // if (data.features[0].geometry.type === 'LineString') {
-        //     const answer = document.getElementById('calculated-area-line');
-        //     const line = turf.lineString(data.features[0].geometry.coordinates);
-        //     const length = turf.length(line, {units: 'kilometers'});
-        //     answer.innerHTML = `<span class="value">${length}</span><span class="unit">km.</span>`;
-        // } else {
-        //     const answer = document.getElementById('calculated-area-polygon');
-        //     const area = turf.area(data);
-        //     // Restrict the area to 2 decimal points.
-        //     const rounded_area = Math.round(area * 100) / 100;
-        //     answer.innerHTML = `<span class="value">${rounded_area}</span><span class="unit">sq.m.</span>`;
-        // }
     };
     const selectPolygon = (e) => {
         const elementType = e.features[0]?.geometry?.type;
