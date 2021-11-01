@@ -7,6 +7,9 @@ import {AppMain} from "./components/app-main/AppMain";
 import {AppDirMain} from "./components/app-main/AppDirMain";
 import {AppObjectMain} from "./components/app-main/AppObjectMain";
 
+import {useDispatch, useSelector} from "react-redux";
+import {showMapTC} from "./bll/reducer";
+
 const modeTypes = [
     {name: "Geocoder", value: "Geo", id: '1'},
     {name: "Directions", value: "Dir", id: '2'},
@@ -18,6 +21,8 @@ const App = () => {
     const [mapStyle, setMapStyle] = useState('');
     const [content, setContent] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const show = useSelector(state => state.info.isShow)
+    const dispatch = useDispatch();
 
     const contentMount = () => {
         switch (mode) {
@@ -42,6 +47,10 @@ const App = () => {
         return () => clearTimeout(timer);
     };
 
+    const showMap = () => {
+        dispatch(showMapTC());
+    }
+
     useEffect(() => {
         changePage();
     }, [ ]);
@@ -51,11 +60,12 @@ const App = () => {
     }, [mode]);
 
     return (
-        <div className="App">
-            <AppHeader mode={mode} setMode={setMode} items={modeTypes}/>
-            {isLoading && <AppLoading/>}
-            {content}
-        </div>
+    <div className="App">
+        <AppHeader mode={mode} setMode={setMode} items={modeTypes}/>
+        {isLoading && <AppLoading/>}
+        {show && content}
+        <button onClick={showMap}>{show ? 'Hide' : 'show'}</button>
+    </div>
     );
 }
 
