@@ -1,4 +1,5 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppStoreType} from "../store/store";
 
 export const SHOW_MAP = "SHOW_MAP";
 
@@ -10,7 +11,7 @@ export interface IState {
 }
 
 type Return = void;
-type State = any;
+type State = AppStoreType;
 type ExtraArgument = {};
 
 export const initialState: IState = {
