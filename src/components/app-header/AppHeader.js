@@ -1,4 +1,4 @@
-import logo from '../../logo.svg';
+import logo from '../../assets/icons/logo.svg';
 import './AppHeader.scss';
 import {FunctionalSwitchableMode} from "../functional-mode/FunctionalMode"; // eslint-disable-line import/no-webpack-loader-syntax
 

@@ -14,6 +14,7 @@ import {showMapTC} from "./bll/reducer";
 const modeTypes = [
     {name: "Geocoder", value: "Geo", id: '1'},
     {name: "Directions", value: "Dir", id: '2'},
+    {name: "Object", value: "3D", id: '3'},
 ];
 
 const App = () => {
@@ -64,7 +65,7 @@ const App = () => {
         <AppHeader setMode={setMode} items={modeTypes}/>
         {isLoading && <AppLoading/>}
         {show && content}
-        <button onClick={showMap}>{show ? 'Hide' : 'show'}</button>
+        <button className='App-hidden-button' onClick={showMap}>{show ? 'Hide' : 'show'}</button>
     </div>
     );
 }
