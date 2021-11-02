@@ -2,7 +2,7 @@ import logo from '../../logo.svg';
 import './AppHeader.scss';
 import {FunctionalSwitchableMode} from "../functional-mode/FunctionalMode"; // eslint-disable-line import/no-webpack-loader-syntax
 
-export const AppHeader = ({mode, setMode, items}) => {
+export const AppHeader = ({setMode, items}) => {
     return (
         <header className="App-header">
             <img src={logo} className="App-logo" alt="logo"/>

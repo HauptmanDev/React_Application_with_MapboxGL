@@ -6,6 +6,7 @@ import {AppLoading} from "./components/app-loading/AppLoading";
 import {AppMain} from "./components/app-main/AppMain";
 import {AppDirMain} from "./components/app-main/AppDirMain";
 import {AppObjectMain} from "./components/app-main/AppObjectMain";
+import {AppTsMain} from "./components/app-main/AppTsMain";
 
 const modeTypes = [
     {name: "Geocoder", value: "Geo", id: '1'},
@@ -28,7 +29,7 @@ const App = () => {
             case "Geo":
                 return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
             default:
-                return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
+                return <AppTsMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
         }
     };
 
@@ -52,7 +53,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <AppHeader mode={mode} setMode={setMode} items={modeTypes}/>
+            <AppHeader setMode={setMode} items={modeTypes}/>
             {isLoading && <AppLoading/>}
             {content}
         </div>

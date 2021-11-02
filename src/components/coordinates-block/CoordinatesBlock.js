@@ -1,6 +1,6 @@
 import './CoordinatesBlock.scss';
 
-export const CoordinatesBlock = ({type, title, id, className, callback, buttonName, children}) => {
+export const CoordinatesBlock = ({type = '', title, id = '', className = '', callback, buttonName='', children}) => {
 
     const inputBlock = () => {
         return (
@@ -25,7 +25,7 @@ export const CoordinatesBlock = ({type, title, id, className, callback, buttonNa
         return (
             <div className="coordinates-block">
                 <span>{title}</span>
-                {children}
+                {children && children}
             </div>
         )
     };
