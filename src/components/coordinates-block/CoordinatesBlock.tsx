@@ -1,12 +1,23 @@
+import React from 'react';
 import './CoordinatesBlock.scss';
 
-export const CoordinatesBlock = ({type = '', title, id = '', className = '', callback, buttonName='', children}) => {
+type coordinatesBlockPropsType = {
+    type?: string,
+    title?: string,
+    id?: string,
+    className?: string,
+    callback?: (e: any) => void,
+    buttonName?: string,
+}
+
+export const CoordinatesBlock: React.FC<coordinatesBlockPropsType> = ({type = '', title, id = '', className = '', callback, buttonName='', children}) => {
 
     const inputBlock = () => {
         return (
             <div className="coordinates-block">
                 <span>{title}</span>
-                <input id={id} maxLength='5' step='0.5' type={'number'} className={`mapboxgl-${className}`}
+                {/* @ts-ignore*/}
+                <input id={id} maxLength={'5'} step='0.5' type={'number'} className={`mapboxgl-${className}`}
                        onChange={callback}/>
             </div>
         )
