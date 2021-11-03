@@ -3,12 +3,9 @@ import {useEffect, useState} from "react";
 import {AppHeader} from "./components/app-header/AppHeader";
 import {AppLoading} from "./components/app-loading/AppLoading";
 
-// import {AppMain} from "./components/app-main/AppMain";
-// import {AppDirMain} from "./components/app-main/AppDirMain";
-// import {AppObjectMain} from "./components/app-main/js-components/AppObjectMain";
-import {AppTsMain} from "./components/app-main/AppTsMain";
-import {AppTsDirMain} from "./components/app-main/AppTsDirMain";
-import {AppTsObjectMain} from "./components/app-main/AppTsObjectMain";
+import {AppMain} from "./components/app-main/AppMain";
+import {AppDirMain} from "./components/app-main/AppDirMain";
+import {AppObjectMain} from "./components/app-main/js-components/AppObjectMain";
 
 import {useDispatch, useSelector} from "react-redux";
 import {showMapTC} from "./bll/reducer";
@@ -34,16 +31,13 @@ const App = () => {
     const contentMount = () => {
         switch (mode) {
             case "3D":
-                // return <AppObjectMain token={token}/>;
-                return <AppTsObjectMain token={token}/>;
+                return <AppObjectMain token={token}/>;
             case "Dir":
-                // return <AppDirMain mapStyle={mapStyle}/>;
-                return <AppTsDirMain mapStyle={mapStyle} token={token}/>;
+                return <AppDirMain mapStyle={mapStyle}/>;
             case "Geo":
-                // return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
-                return <AppTsMain mapStyle={mapStyle} setMapStyle={setMapStyle} token={token}/>;
+                return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
             default:
-                return <AppTsMain mapStyle={mapStyle} setMapStyle={setMapStyle} token={token}/>;
+                return <AppMain mapStyle={mapStyle} setMapStyle={setMapStyle}/>;
         }
     };
 

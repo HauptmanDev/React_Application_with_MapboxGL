@@ -11,7 +11,7 @@ import {AppTsObjectMain} from "./components/app-main/AppTsObjectMain";
 import {useDispatch, useSelector} from "react-redux";
 import {showMapTC} from "./bll/reducer";
 
-type modeType = {
+export type modeType = {
     name: string,
     value: string,
     id: string
@@ -69,7 +69,7 @@ const AppTs = () => {
 
     return (
         <div className="App">
-            <AppHeader setMode={setMode} items={modeTypes}/>
+            <AppHeader setMode={(mode: string) => setMode(mode)} items={modeTypes}/>
             {isLoading && <AppLoading/>}
             {show && content}
             <button className='App-hidden-button' onClick={showMap}>{show ? 'Hide' : 'show'}</button>

@@ -5,7 +5,7 @@ import React, {ReactElement} from 'react';
 
 type functionalModePropsType = {
     name: string,
-    callback: () => string,
+    callback: (arg: string) => void,
     items: Array<any>
 }
 
