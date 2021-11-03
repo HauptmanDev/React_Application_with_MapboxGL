@@ -1,12 +1,12 @@
-import './AppMain.scss';
+import '../AppMain.scss';
 import {useEffect, useRef, useState} from "react";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import * as turf from '@turf/turf'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import {CoordinatesStyleWrapper} from "../coordinates-style-wrapper/CoordinatesStyleWrapper";
-import {CalculationBasicBlock, CalculationBlock} from "../calculation-box/CalculationBlock";
-import {CoordinatesBlock} from "../coordinates-block/CoordinatesBlock";
+import {CoordinatesStyleWrapper} from "../../coordinates-style-wrapper/CoordinatesStyleWrapper";
+import {CalculationBasicBlock, CalculationBlock} from "../../calculation-box/CalculationBlock";
+import {CoordinatesBlock} from "../../coordinates-block/CoordinatesBlock";
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGF1cHRtYW5kZXYiLCJhIjoiY2t1bWszNnM2MWU1aDJwbzZqc3BkeGhweSJ9.a4FkHvvjek1E88SKJ0OAqw';
@@ -87,19 +87,16 @@ export const AppMain = ({mapStyle, setMapStyle, setIsLoading}) => {
 
     // FullscreenControl
     const fullscreenControl = new mapboxgl.FullscreenControl();
-
     // NavigationControl
     const navigationControl = new mapboxgl.NavigationControl({
         showCompass: true,
         showZoom: true,
     });
-
     // MapboxGeocoder
     const mapboxGeocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
     });
-
     //MapboxDraw and updateArea
     const mapboxDraw = new MapboxDraw({
         displayControlsDefault: false,

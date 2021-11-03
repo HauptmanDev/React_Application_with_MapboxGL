@@ -1,32 +1,19 @@
 import './AppMain.scss';
-import React from 'react'
+import React from 'react';
 import {useEffect, useRef, useState} from "react";
-// @ts-ignore
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import * as turf from '@turf/turf'
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-// @ts-ignore
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import * as turf from '@turf/turf';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import {CoordinatesStyleWrapper} from "../coordinates-style-wrapper/CoordinatesStyleWrapper";
 import {CalculationBasicBlock, CalculationBlock} from "../calculation-box/CalculationBlock";
 import {CoordinatesBlock} from "../coordinates-block/CoordinatesBlock";
 // @ts-ignore
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+// @ts-ignore
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+// @ts-ignore
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGF1cHRtYW5kZXYiLCJhIjoiY2t1bWszNnM2MWU1aDJwbzZqc3BkeGhweSJ9.a4FkHvvjek1E88SKJ0OAqw';
-
-
-interface IAppTsMainProps {
-    mapStyle: string,
-    setMapStyle: (i: string) => void,
-}
-
-interface IInitCoordinates {
-    initLng: number,
-    initLat: number,
-    initZoom: number,
-    initStyle: string
-}
 
 const initCoordinates: IInitCoordinates = {
     initLng: +Number(27.55).toFixed(2),
@@ -35,9 +22,21 @@ const initCoordinates: IInitCoordinates = {
     initStyle: 'mapbox://styles/mapbox/dark-v10',
 };
 
+export interface IAppTsMainProps {
+    mapStyle?: string,
+    setMapStyle?: (i: string) => void,
+}
+
+export interface IInitCoordinates {
+    initLng: number,
+    initLat: number,
+    initZoom: number,
+    initStyle: string,
+}
+
 export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> {
 
-    const mapContainer = useRef<HTMLDivElement>(null);
+    const mapContainer = useRef<HTMLDivElement | null>(null);
     const map = useRef<any>(null);
     const [lng, setLng] = useState<number>(initCoordinates.initLng);
     const [lat, setLat] = useState<number>(initCoordinates.initLat);
@@ -45,8 +44,8 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
 
     const setNewCoordinates = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!map.current) return; // wait for map to initialize
-        const input = e.target.id;
-        const value = +Number(e.target.value).toFixed(2);
+        const input: string = e.target.id;
+        const value: number = +Number(e.target.value).toFixed(2);
 
         switch (input) {
             case 'lng':
@@ -67,8 +66,8 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
     };
 
     const setNewTypeStyle = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        const newTypeStyle = e.target.value;
-        setMapStyle(newTypeStyle);
+        const newTypeStyle: string | number = e.target.value;
+        if (setMapStyle) setMapStyle(newTypeStyle);
         map.current.setStyle(newTypeStyle);
     };
 
@@ -104,13 +103,11 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
 
     // FullscreenControl
     const fullscreenControl = new mapboxgl.FullscreenControl();
-
     // NavigationControl
     const navigationControl = new mapboxgl.NavigationControl({
         showCompass: true,
         showZoom: true,
     });
-
     // MapboxGeocoder
     const mapboxGeocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -181,15 +178,23 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
 
     // Init
     useEffect(() => {
-        map.current = new mapboxgl.Map({
+        type optionsType = {
+            container: any,
+            style: string,
+            center: Array<number>,
+            zoom: number,
+            pitch?: number,
+            bearing?: number,
+            antialias?: boolean
+        }
+        const options: optionsType = {
             container: mapContainer.current,
             style: initCoordinates.initStyle,
             center: [initCoordinates.initLng, initCoordinates.initLat],
-            // center: [-122.619991, 45.536023], // Portland
             zoom: initCoordinates.initZoom,
             antialias: true,
-            // attributionControl: false,
-        });
+        }
+        map.current = new mapboxgl.Map(options);
         map.current.addControl(fullscreenControl, "top-right");
         map.current.addControl(mapboxDraw, 'top-right');
         map.current.addControl(navigationControl, "top-right");
@@ -204,7 +209,7 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
     // Move
     useEffect(() => {
         if (!map.current) return; // wait for map to initialize
-        map.current.on('move', () => {
+        map.current.on('move', (): void => {
             setLng(map.current.getCenter().lng.toFixed(2));
             setLat(map.current.getCenter().lat.toFixed(2));
             setZoom(map.current.getZoom().toFixed(2));
