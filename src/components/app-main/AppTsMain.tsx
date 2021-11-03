@@ -1,19 +1,21 @@
 import './AppMain.scss';
 import React from 'react';
 import {useEffect, useRef, useState} from "react";
-import * as turf from '@turf/turf';
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import {CoordinatesBlock} from "../coordinates-block/CoordinatesBlock";
 import {CoordinatesStyleWrapper} from "../coordinates-style-wrapper/CoordinatesStyleWrapper";
 import {CalculationBasicBlock, CalculationBlock} from "../calculation-box/CalculationBlock";
-import {CoordinatesBlock} from "../coordinates-block/CoordinatesBlock";
+import {optionsType, IInitCoordinates, IAppTsMainProps} from "./common-types/types";
+import * as turf from '@turf/turf';
 // @ts-ignore
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 // @ts-ignore
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 // @ts-ignore
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGF1cHRtYW5kZXYiLCJhIjoiY2t1bWszNnM2MWU1aDJwbzZqc3BkeGhweSJ9.a4FkHvvjek1E88SKJ0OAqw';
+
 
 const initCoordinates: IInitCoordinates = {
     initLng: +Number(27.55).toFixed(2),
@@ -22,17 +24,6 @@ const initCoordinates: IInitCoordinates = {
     initStyle: 'mapbox://styles/mapbox/dark-v10',
 };
 
-export interface IAppTsMainProps {
-    mapStyle?: string,
-    setMapStyle?: (i: string) => void,
-}
-
-export interface IInitCoordinates {
-    initLng: number,
-    initLat: number,
-    initZoom: number,
-    initStyle: string,
-}
 
 export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> {
 
@@ -74,17 +65,25 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
     const resetToDefaultValues = (): void => {
         if (!map.current) return; // wait for map to initialize
 
-        map.current.resetNorth({duration: 2000});
-
-        map.current.flyTo({
+        type mapOptionsType = {
+            duration?: number,
+            center?: Array<number>,
+            zoom?: number,
+            essential?: boolean
+        }
+        const resetNorthOptions: mapOptionsType = {duration: 2000};
+        const flyOptions: mapOptionsType = {
             center: [initCoordinates.initLng, initCoordinates.initLat],
             zoom: initCoordinates.initZoom,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
-        })
+        }
+
+        map.current.resetNorth(resetNorthOptions);
+        map.current.flyTo(flyOptions);
 
         setLng(initCoordinates.initLng);
         setLat(initCoordinates.initLat);
-        setZoom(initCoordinates.initZoom)
+        setZoom(initCoordinates.initZoom);
     };
 
     const styleMapboxSelect = (
@@ -140,8 +139,7 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
 
         } else {
             if (answer) answer.innerHTML = '';
-            if (e.type !== 'draw.delete')
-                alert('Click the map to draw a polygon.');
+            if (e.type !== 'draw.delete') alert('Click the map to draw a polygon.');
         }
     };
     const selectPolygon = (e: React.ChangeEventHandler<HTMLElement>): void => {
@@ -178,15 +176,6 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
 
     // Init
     useEffect(() => {
-        type optionsType = {
-            container: any,
-            style: string,
-            center: Array<number>,
-            zoom: number,
-            pitch?: number,
-            bearing?: number,
-            antialias?: boolean
-        }
         const options: optionsType = {
             container: mapContainer.current,
             style: initCoordinates.initStyle,

@@ -1,39 +1,41 @@
 import './AppMain.scss';
+import React from 'react';
 import {useEffect, useRef, useState} from "react";
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import {CoordinatesStyleWrapper} from "../coordinates-style-wrapper/CoordinatesStyleWrapper";
+// @ts-ignore
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+// @ts-ignore
+import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import {optionsType, IInitCoordinates, IAppTsMainProps} from "./common-types/types";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGF1cHRtYW5kZXYiLCJhIjoiY2t1bWszNnM2MWU1aDJwbzZqc3BkeGhweSJ9.a4FkHvvjek1E88SKJ0OAqw';
 
-const initCoordinates = {
-    initLng: Number(27.55).toFixed(2),
-    initLat: Number(53.90).toFixed(2),
-    initZoom: Number(10).toFixed(2),
+const initCoordinates: IInitCoordinates = {
+    initLng: +Number(27.55).toFixed(2),
+    initLat: +Number(53.90).toFixed(2),
+    initZoom: +Number(10).toFixed(2),
     initStyle: 'mapbox://styles/mapbox/satellite-streets-v11',
     // initStyle: 'mapbox://styles/mapbox/dark-v10',
 };
 
-export const AppDirMain = ({mapStyle, setIsLoading}) => {
+export const AppTsDirMain : React.FC<IAppTsMainProps> = ({mapStyle}) => {
 
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [lng, setLng] = useState(initCoordinates.initLng);
-    const [lat, setLat] = useState(initCoordinates.initLat);
-    const [zoom, setZoom] = useState(initCoordinates.initZoom);
+    const mapContainer = useRef<HTMLDivElement | null>(null);
+    const map = useRef<any>(null);
+    const [lng, setLng] = useState<number>(initCoordinates.initLng);
+    const [lat, setLat] = useState<number>(initCoordinates.initLat);
+    const [zoom, setZoom] = useState<number>(initCoordinates.initZoom);
 
-    const [distance, setDistance] = useState(0);
-    const [time, setTime] = useState(0);
+    const [distance, setDistance] = useState<number>(0);
+    const [time, setTime] = useState<number>(0);
 
     // FullscreenControl
     const fullscreenControl = new mapboxgl.FullscreenControl();
-
     // NavigationControl
     const navigationControl = new mapboxgl.NavigationControl({
         showCompass: true,
         showZoom: true,
     })
-
     // MapboxDirections
     const mapboxDirections = new MapboxDirections({
         accessToken: mapboxgl.accessToken,
@@ -41,32 +43,29 @@ export const AppDirMain = ({mapStyle, setIsLoading}) => {
         steps: false,
         language: 'ru',
         geometries: 'polyline',
-        controls: {instructions: false}
+        controls: {instructions: false},
     });
-
     // Init
     useEffect(() => {
-        map.current = new mapboxgl.Map({
+        const options: optionsType = {
             container: mapContainer.current,
             style: mapStyle || initCoordinates.initStyle,
             center: [initCoordinates.initLng, initCoordinates.initLat],
-            // center: [-122.619991, 45.536023], // Portland
             zoom: initCoordinates.initZoom,
             antialias: true,
-            // attributionControl: false,
-        });
+        }
+        map.current = new mapboxgl.Map(options);
         map.current.addControl(fullscreenControl, "top-right");
         map.current.addControl(navigationControl, "top-right");
         map.current.addControl(mapboxDirections, "top-left");
 
         map.current.on('load', ( ) => {
-            mapboxDirections.on('route', (event) => {
+            mapboxDirections.on('route', (event: any) => {
                 const info = event.route[0];
                 setDistance(Math.ceil(info.distance / 1000));
                 setTime(Math.ceil(info.duration / 3600));
             });
         })
-
     }, []);
 
     // Move
@@ -101,4 +100,5 @@ export const AppDirMain = ({mapStyle, setIsLoading}) => {
             </article>
         </main>
     );
-}
+};
+// @ts-ignore
