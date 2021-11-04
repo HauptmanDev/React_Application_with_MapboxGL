@@ -32,7 +32,7 @@ const AppTs = () => {
     const show: boolean = useSelector(state => state.info.isShow);
     const dispatch = useDispatch();
 
-    const contentMount = () => {
+    const contentMount = (): React.ReactElement => {
         switch (mode) {
             case "3D":
                 return <AppTsObjectMain/>;
@@ -59,11 +59,11 @@ const AppTs = () => {
         dispatch(showMapTC());
     };
 
-    useEffect(() => {
+    useEffect((): void => {
         changePage();
     }, []);
 
-    useEffect(() => {
+    useEffect((): void => {
         changePage();
     }, [mode]);
 

@@ -12,7 +12,7 @@ type coordinatesBlockPropsType = {
 
 export const CoordinatesBlock: React.FC<coordinatesBlockPropsType> = ({type = '', title, id = '', className = '', callback, buttonName='', children}) => {
 
-    const inputBlock = () => {
+    const inputBlock = (): React.ReactElement => {
         return (
             <div className="coordinates-block">
                 <span>{title}</span>
@@ -23,7 +23,7 @@ export const CoordinatesBlock: React.FC<coordinatesBlockPropsType> = ({type = ''
         )
     };
 
-    const buttonBlock = () => {
+    const buttonBlock = (): React.ReactElement => {
         return (
             <div className="coordinates-block">
                 <span>{title}</span>
@@ -32,7 +32,7 @@ export const CoordinatesBlock: React.FC<coordinatesBlockPropsType> = ({type = ''
         )
     };
 
-    const emptyBlock = () => {
+    const emptyBlock = (): React.ReactElement => {
         return (
             <div className="coordinates-block">
                 <span>{title}</span>
@@ -41,7 +41,7 @@ export const CoordinatesBlock: React.FC<coordinatesBlockPropsType> = ({type = ''
         )
     };
 
-    const contentFunction = () => {
+    const contentFunction = (): React.ReactElement => {
         if (!id && !type) {
             return emptyBlock();
         } else {

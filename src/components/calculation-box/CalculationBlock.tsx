@@ -1,6 +1,10 @@
 import React from 'react';
 import './CalculationBlock.scss';
 
+type PropsType = {
+    id: string
+}
+
 type Types = {
     polygon: string,
     line: string
@@ -11,7 +15,7 @@ const types: Types = {
     line: "Line: "
 }
 
-export const CalculationBlock: React.FC<{id: string}> = ({id}) => {
+export const CalculationBlock: React.FC<PropsType> = ({id}) => {
     return (
         <div className="calculation-box">
             {/* @ts-ignore */}
