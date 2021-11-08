@@ -25,7 +25,7 @@ const initCoordinates: IInitCoordinates = {
 };
 
 
-export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> {
+export const AppTsMain = ({mapStyle, setMapStyle}: IAppTsMainProps): JSX.Element => {
 
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const map = useRef<any>(null);
@@ -86,7 +86,7 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
         setZoom(initCoordinates.initZoom);
     };
 
-    const styleMapboxSelect = (
+    const styleMapboxSelect: JSX.Element = (
         <select value={mapStyle} className="mapboxgl-styles-list" name="styles" id="new-style"
                 onChange={setNewTypeStyle}>
             <option value="mapbox://styles/mapbox/streets-v11">Streets-v11</option>
@@ -217,13 +217,13 @@ export const AppTsMain: React.FC <IAppTsMainProps>= ({mapStyle, setMapStyle})=> 
                         </CoordinatesStyleWrapper>
                         <CoordinatesStyleWrapper title={'Enter new coordinates'}>
                             <CoordinatesBlock type={'input'} title={'Longitude:'} id={'lng'} className={'lng'}
-                                              callback={setNewCoordinates} children={undefined}/>
+                                              callback={setNewCoordinates}/>
                             <CoordinatesBlock type={'input'} title={'Latitude:'} id={'lat'} className={'lat'}
-                                              callback={setNewCoordinates} children={undefined}/>
+                                              callback={setNewCoordinates}/>
                             <CoordinatesBlock type={'input'} title={'Zoom:'} id={'zoom'} className={'zoom'}
-                                              callback={setNewCoordinates} children={undefined}/>
+                                              callback={setNewCoordinates}/>
                             <CoordinatesBlock type={'button'} title={'Reset to default values:'} id={'reset'}
-                                              callback={resetToDefaultValues} buttonName={'Reset'} children={undefined}/>
+                                              callback={resetToDefaultValues} buttonName={'Reset'}/>
                         </CoordinatesStyleWrapper>
                         <CoordinatesStyleWrapper title={'Choice new style'}>
                             {/*@ts-ignore*/}

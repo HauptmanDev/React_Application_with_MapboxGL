@@ -8,7 +8,7 @@ type appHeaderPropsType = {
     items: Array<any>
 }
 
-export const AppHeader: React.FC<appHeaderPropsType> = ({setMode, items}) => {
+export const AppHeader = ({setMode, items}: appHeaderPropsType): JSX.Element => {
     const linkStyleObj: React.CSSProperties = {textDecoration: 'none'};
     return (
         <header className="App-header">

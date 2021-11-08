@@ -1,10 +1,11 @@
 import React from 'react';
 
 type coordinatesStyleWrapperPropsType = {
-    title: string
+    title: string,
+    children?: JSX.Element[]
 }
 
-export const CoordinatesStyleWrapper: React.FC<coordinatesStyleWrapperPropsType> = ({title, children}) => {
+export const CoordinatesStyleWrapper = ({title, children}: coordinatesStyleWrapperPropsType): JSX.Element => {
     return (
         <div className="coordinates">
             <span className="title">{title}</span>
