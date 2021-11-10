@@ -1,4 +1,4 @@
-.App-main, .App-dir-main, .App-obj-main {
+.App-main, .App-dir-main, .App-obj-main, .App-ex-main{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -607,6 +607,24 @@
       width: 300px;
       top: 0;
       padding: 12px 5px;
+    }
+  }
+}
+
+.App-ex-main {
+  .App-article {
+    width: 100%;
+    height: 100%;
+
+    input {
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    input:focus {
+      border: 2px solid crimson;
+      outline: none;
+
     }
   }
 }

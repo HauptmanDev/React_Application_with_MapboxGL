@@ -16,6 +16,15 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGF1cHRtYW5kZXYiLCJhIjoiY2t1bWszNnM2MWU1aDJwbzZqc3BkeGhweSJ9.a4FkHvvjek1E88SKJ0OAqw';
 
+type InitObjType = {
+    id: string,
+    name: string
+}
+
+const myObj: InitObjType = {
+    id: 'id',
+    name: 'name'
+}
 
 const initCoordinates: IInitCoordinates = {
     initLng: +Number(27.55).toFixed(2),
@@ -32,6 +41,13 @@ export const AppTsMain = ({mapStyle, setMapStyle}: IAppTsMainProps): JSX.Element
     const [lng, setLng] = useState<number>(initCoordinates.initLng);
     const [lat, setLat] = useState<number>(initCoordinates.initLat);
     const [zoom, setZoom] = useState<number>(initCoordinates.initZoom);
+    // const [initObj, setInitObj] = useState<InitObjType>({} as InitObjType)
+    //
+    // useEffect(() => {
+    //     setInitObj(myObj)
+    // }, [])
+    //
+    // useEffect(() => console.log("1", initObj), [initObj])
 
     const setNewCoordinates = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!map.current) return; // wait for map to initialize
