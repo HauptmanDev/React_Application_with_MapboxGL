@@ -18,7 +18,7 @@ const initCoordinates: IInitCoordinates = {
     initStyle: 'mapbox://styles/mapbox/light-v10',
 };
 
-export const AppTsObjectMain = () => {
+export const AppTsObjectMain = (): JSX.Element => {
 
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const map = useRef<any>(null);

@@ -15,7 +15,7 @@ const types: Types = {
     line: "Line: "
 }
 
-export const CalculationBlock: React.FC<PropsType> = ({id}) => {
+export const CalculationBlock= ({id}: PropsType): JSX.Element => {
     return (
         <div className="calculation-box">
             {/* @ts-ignore */}
@@ -25,7 +25,7 @@ export const CalculationBlock: React.FC<PropsType> = ({id}) => {
     );
 }
 
-export const CalculationBasicBlock: React.FC = () => {
+export const CalculationBasicBlock = (): JSX.Element => {
     return (
         <div className="calculation-box">
             <div className="property-type">All zones:</div>

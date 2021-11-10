@@ -18,7 +18,7 @@ const initCoordinates: IInitCoordinates = {
     // initStyle: 'mapbox://styles/mapbox/dark-v10',
 };
 
-export const AppTsDirMain : React.FC<IAppTsMainProps> = ({mapStyle}) => {
+export const AppTsDirMain = ({mapStyle}: IAppTsMainProps): JSX.Element => {
 
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const map = useRef<any>(null);

@@ -1,11 +1,11 @@
 .abg-switch__container {
-  width: auto;
-  height: 27px;
-  min-height: 20px;
-  position: absolute;
-  right: 10px;
-  font-size: 12px;
-  background-color: rgba(35, 55, 75, 0.9);
+  width: auto !important;
+  height: 27px !important;
+  min-height: 20px !important;
+  position: absolute !important;
+  right: 10px !important;
+  font-size: 12px !important;
+  background-color: rgba(35, 55, 75, 0.9) !important;
 
   .abg-switch__item {
     padding: 13px;
